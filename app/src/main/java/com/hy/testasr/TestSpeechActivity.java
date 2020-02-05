@@ -629,8 +629,10 @@ public class TestSpeechActivity extends AppCompatActivity implements View.OnClic
 
                                 switch (labelIndex - 2) {
                                     case 0:
+                                        Toast.makeText(TestSpeechActivity.this,"听不清楚，请再说一遍",Toast.LENGTH_SHORT).show();
                                         break;
                                     case 1:
+                                        Toast.makeText(TestSpeechActivity.this,"听不清楚，请再说一遍",Toast.LENGTH_SHORT).show();
                                         break;
                                     case 2:
                                         up();
@@ -645,12 +647,16 @@ public class TestSpeechActivity extends AppCompatActivity implements View.OnClic
                                         right();
                                         break;
                                     case 6:
+                                        Toast.makeText(TestSpeechActivity.this,"听不清楚，请再说一遍",Toast.LENGTH_SHORT).show();
                                         break;
                                     case 7:
+                                        Toast.makeText(TestSpeechActivity.this,"听不清楚，请再说一遍",Toast.LENGTH_SHORT).show();
                                         break;
                                     case 8:
+                                        Toast.makeText(TestSpeechActivity.this,"听不清楚，请再说一遍",Toast.LENGTH_SHORT).show();
                                         break;
                                     case 9:
+                                        Toast.makeText(TestSpeechActivity.this,"听不清楚，请再说一遍",Toast.LENGTH_SHORT).show();
                                         break;
                                 }
 
@@ -691,6 +697,8 @@ public class TestSpeechActivity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        stopRecording();
+        stopRecognition();
         // 退出时释放连接
 //        mAsr.cancel();
 //        mAsr.destroy();
