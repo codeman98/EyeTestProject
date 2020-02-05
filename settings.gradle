@@ -1,2 +1,2 @@
-include ':app'
-rootProject.name='Eyes'
+include ':example', ':latte-annotation', ':latte-compiler', ':latte-core', ':latte-eye', ':latte-ui'
+rootProject.name='Eyes3'
