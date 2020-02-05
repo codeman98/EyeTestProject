@@ -1,0 +1,7 @@
+server:
+  # 端口号
+  port: 8080
+  context-path: /RestDataServer
+
+  # 手机访问index_data.json和index_2_data.json,返回值有问题
+  # 发现不用index就好使,所以增加了goods1.json和goods2.json代替上面2个.
