@@ -125,6 +125,8 @@ public class SpeechActivity extends ProxyActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_speech);
 
+
+
         // Load the labels for the model, but only display those that don't start
         // with an underscore.
         String actualLabelFilename = LABEL_FILENAME.split("file:///android_asset/", -1)[1];

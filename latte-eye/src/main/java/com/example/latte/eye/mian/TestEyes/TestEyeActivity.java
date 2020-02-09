@@ -1,5 +1,6 @@
 package com.example.latte.eye.mian.TestEyes;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,6 +14,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
@@ -90,6 +92,8 @@ public class TestEyeActivity extends AppCompatActivity implements View.OnClickLi
     private int mRet = 0;
     private ArrayList<Item> mUserList = new ArrayList<>();
     private Toast mToast;
+    View test_touch;
+    float posX,posY,curPosX,curPosY;
 
 
     // 语音识别对象
@@ -119,6 +123,52 @@ public class TestEyeActivity extends AppCompatActivity implements View.OnClickLi
         } catch (IOException e) {
             throw new RuntimeException("Problem reading label file!", e);
         }
+
+        test_touch = (View) this.findViewById(R.id.touch_view);
+        test_touch.setLongClickable(true);
+
+        //设置监听器
+        test_touch.setOnTouchListener(new View.OnTouchListener() {
+            @SuppressLint("ClickableViewAccessibility")
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                //show_touch.setText("开始测试");     //显示测试结果
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        posX = event.getX();
+                        posY = event.getY();
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        curPosX = event.getX();
+                        curPosY = event.getY();
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        float left = curPosX - posX;
+                        float up = curPosY - posY;
+                        float dx = Math.abs(curPosX - posX);
+                        float dy = Math.abs(curPosY - posY);
+
+                        if((dx + dy) > 100) {
+                            //检测到滑动结束并修改view中的显示
+                            if ((left >= 0) && (dx >= dy)) {
+                                //show_touch.setText("向右滑动");
+                                right();
+                            } else if ((left < 0) && (dx >= dy)) {
+//                                show_touch.setText("向左滑动");
+                                left();
+                            } else if ((up >= 0) && (dx < dy)) {
+                               // show_touch.setText("向下滑动");
+                                down();
+                            } else if ((up < 0) && (dx < dy)) {
+                               // show_touch.setText("向上滑动");
+                                up();
+                            }
+                        }
+                        break;
+                }
+                return true;
+            }
+        });
 
         // Set up an object to smooth recognition results to increase accuracy.
         recognizeCommands =
