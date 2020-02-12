@@ -1,2 +1,0 @@
-include ':example', ':latte-annotation', ':latte-compiler', ':latte-core', ':latte-eye', ':latte-ui'
-rootProject.name='Eyes3'
